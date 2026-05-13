@@ -1,2 +1,0 @@
-model,total_samples,correct_predictions,accuracy,timestamp
-gpt2,200,88,0.44,20250708_000746
