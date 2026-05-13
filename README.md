@@ -109,9 +109,6 @@ Access the fully functional responsive client portal at `http://localhost:5001/`
 
 This repository is organized to seamlessly map frontend routing paradigms. 
 
-> **Important Deployment Note for Examiners:**  
-> The core inference component depends on local Metal GPU acceleration via the Ollama daemon to ensure sub-second contextual answers. Deploying the system purely to serverless functions (e.g., Vercel API nodes) requires pointing the internal `OLLAMA_URL` environment configuration to an external inference cluster or public endpoint key. For thesis defense demonstrations, local runtime instantiation represents the highest performing paradigm.
-
 ---
 
 ## 📊 Evaluation & Verification Metrics
@@ -122,4 +119,4 @@ Rigorous statistical validation confirms:
 - **ROUGE-L Overlap:** Sustains high lexical retention scores averaging $0.7606$ across benchmark validation sets.
 
 ---
-*Developed for academic integrity evaluation. Codebase polished for production readiness.*
+
