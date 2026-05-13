@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSBM Virtual Portal — Sentiment Modulated RAG</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg-base: #060809;
+            --bg-surface: #0c1012;
+            --bg-panel: #13181b;
+            --bg-input: #1a2024;
+            --border-subtle: #232b30;
+            --border-highlight: rgba(13, 148, 136, 0.3);
+            
+            --nsbm-emerald: #0d9488;
+            --nsbm-teal: #14b8a6;
+            --nsbm-cyan: #06b6d4;
+            --accent-glow: rgba(20, 184, 166, 0.15);
+            
+            --text-main: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+
+            --emotion-joy: #f59e0b;
+            --emotion-sadness: #3b82f6;
+            --emotion-anger: #ef4444;
+            --emotion-fear: #f97316;
+            --emotion-surprise: #06b6d4;
+            --emotion-love: #ec4899;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── Top Navigation Bar ── */
+        .navbar {
+            height: 64px;
+            background-color: var(--bg-surface);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            z-index: 50;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .brand-logo {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--nsbm-emerald), var(--nsbm-cyan));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25);
+        }
+
+        .brand-titles h1 {
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            color: var(--text-main);
+        }
+
+        .brand-titles p {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .portal-meta {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--bg-panel);
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--nsbm-teal);
+            box-shadow: 0 0 10px var(--nsbm-teal);
+        }
+
+        /* ── Main Layout Workspace ── */
+        .workspace {
+            display: grid;
+            grid-template-columns: 280px 1fr 380px;
+            flex: 1;
+            height: calc(100vh - 64px);
+            overflow: hidden;
+        }
+
+        /* ── Left Sidebar: System Architecture & Context ── */
+        .sidebar-left {
+            background-color: var(--bg-surface);
+            border-right: 1px solid var(--border-subtle);
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            overflow-y: auto;
+        }
+
+        .section-heading {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .info-card {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .metric-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+
+        .metric-row .metric-lbl {
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .metric-row .metric-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .status-tag {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+        .status-tag.ok { background-color: rgba(20, 184, 166, 0.1); color: var(--nsbm-teal); }
+        .status-tag.err { background-color: rgba(239, 68, 68, 0.1); color: var(--emotion-anger); }
+
+        .memory-box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .memory-hdr {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .btn-link {
+            background: none;
+            border: none;
+            color: var(--nsbm-teal);
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn-link:hover { opacity: 0.8; }
+
+        .memory-stream {
+            flex: 1;
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 12px;
+            overflow-y: auto;
+            max-height: 240px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .memory-item {
+            font-size: 11px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+        .memory-item:last-child { border: none; padding: 0; }
+        .memory-item span.task-tag {
+            color: var(--nsbm-cyan);
+            font-weight: 600;
+            font-size: 9px;
+            text-transform: uppercase;
+            background: rgba(6, 182, 212, 0.1);
+            padding: 1px 5px;
+            border-radius: 4px;
+            margin-right: 6px;
+        }
+
+        /* ── Center: Main Interaction Interface ── */
+        .workspace-center {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background-color: var(--bg-base);
+            position: relative;
+        }
+
+        .stream-container {
+            flex: 1;
+            padding: 32px 48px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Standard custom scrollbar */
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+        .welcome-hero {
+            margin: auto;
+            max-width: 620px;
+            text-align: center;
+            padding: 40px 0;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .welcome-hero h2 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff, var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .welcome-hero p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .preset-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .preset-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .preset-card:hover {
+            border-color: var(--nsbm-emerald);
+            background-color: var(--bg-panel);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .preset-card h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .preset-card p {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* Chat bubbles */
+        .message-row {
+            display: flex;
+            gap: 16px;
+            max-width: 820px;
+            width: 100%;
+            animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .message-row.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .bubble-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .message-row.user .bubble-avatar {
+            background: linear-gradient(135deg, var(--nsbm-emerald), var(--nsbm-teal));
+            border-color: transparent;
+        }
+
+        .bubble-content {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-width: calc(100% - 48px);
+        }
+
+        .message-row.user .bubble-content {
+            align-items: flex-end;
+        }
+
+        .bubble-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            padding: 16px 20px;
+            border-radius: 16px;
+            border-top-left-radius: 4px;
+            font-size: 14px;
+            line-height: 1.65;
+            color: var(--text-main);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .message-row.user .bubble-card {
+            background-color: var(--bg-panel);
+            border-color: var(--border-highlight);
+            border-radius: 16px;
+            border-top-right-radius: 4px;
+            color: var(--text-main);
+        }
+
+        .bubble-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 11px;
+            color: var(--text-muted);
+            padding: 0 4px;
+        }
+
+        .meta-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Interaction Composer */
+        .composer-section {
+            padding: 0 48px 32px;
+            background: linear-gradient(to top, var(--bg-base) 80%, transparent);
+        }
+
+        .input-box {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 12px 16px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+            transition: all 0.2s ease;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .input-box:focus-within {
+            border-color: var(--nsbm-teal);
+            box-shadow: 0 8px 32px var(--accent-glow);
+        }
+
+        .input-box textarea {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: none;
+            max-height: 150px;
+            padding: 4px 0;
+        }
+
+        .input-box textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .btn-submit {
+            width: 36px;
+            height: 36px;
+            background-color: var(--nsbm-emerald);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--nsbm-teal);
+            transform: scale(1.05);
+        }
+
+        .btn-submit:disabled {
+            background-color: var(--border-subtle);
+            color: var(--text-muted);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ── Right Sidebar: Live Analytics & Dynamic Hyperparameter Trajectories ── */
+        .sidebar-right {
+            background-color: var(--bg-surface);
+            border-left: 1px solid var(--border-subtle);
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            overflow-y: auto;
+        }
+
+        .analytics-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Hyperparameter Dashboard item */
+        .chart-box {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 16px;
+            position: relative;
+        }
+
+        .chart-box h4 {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chart-box p.desc {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 180px;
+        }
+
+        /* Current Parameter Readouts */
+        .param-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .param-card {
+            background-color: var(--bg-base);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 10px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .param-card .lbl {
+            font-size: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .param-card .val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--nsbm-cyan);
+        }
+
+        /* Sentiment Output Details */
+        .sentiment-card {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .sentiment-card h4 {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .sentiment-profile {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            background-color: var(--bg-base);
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .emotion-name {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: capitalize;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .task-badge {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background-color: rgba(255,255,255,0.05);
+            color: var(--text-secondary);
+        }
+
+        .conf-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .conf-hdr {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .conf-track {
+            height: 4px;
+            background-color: var(--border-subtle);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .conf-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--nsbm-emerald), var(--nsbm-cyan));
+            border-radius: 2px;
+            transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Loader */
+        .typing-dots {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 2px;
+        }
+
+        .typing-dots span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--nsbm-teal);
+            animation: pulse 1.2s infinite ease-in-out;
+        }
+        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(0.6); opacity: 0.4; }
+            50% { transform: scale(1); opacity: 1; }
+        }
+
+        /* SVG icon sizing */
+        .icon { width: 16px; height: 16px; fill: currentColor; }
+    </style>
+</head>
+<body>
+
+    <!-- ── Top Navigation Bar ── -->
+    <nav class="navbar">
+        <div class="brand">
+            <div class="brand-logo">N</div>
+            <div class="brand-titles">
+                <h1>NSBM Virtual Advisory Portal</h1>
+                <p>Advanced Sentiment-Modulated RAG Framework</p>
+            </div>
+        </div>
+
+        <div class="portal-meta">
+            <div class="status-badge">
+                <div class="status-indicator"></div>
+                <span style="color:var(--text-main);font-weight:500;">Production System Online</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ── Main Workspace Architecture ── -->
+    <div class="workspace">
+        
+        <!-- Left Architecture Sidebar -->
+        <aside class="sidebar-left">
+            <div>
+                <div class="section-heading">System Core Diagnostics</div>
+                <div class="info-card">
+                    <div class="metric-row">
+                        <span class="metric-lbl">Inference Engine</span>
+                        <span class="status-tag ok" id="status-ollama">ONLINE</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-lbl">Vector Engine</span>
+                        <span class="status-tag ok" id="status-chroma">CONNECTED</span>
+                    </div>
+                    <div class="metric-row" style="margin-top:4px;padding-top:8px;border-top:1px solid var(--border-subtle)">
+                        <span class="metric-lbl">Active LLM</span>
+                        <span class="metric-val" id="model-lbl">llama3.1</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-lbl">Knowledge Base</span>
+                        <span class="metric-val" id="kb-count">64 Chunks</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="memory-box">
+                <div class="memory-hdr">
+                    <div class="section-heading" style="margin:0">Conversational Context</div>
+                    <button class="btn-link" onclick="clearMemoryStream()">Purge History</button>
+                </div>
+                <div class="memory-stream" id="memory-stream">
+                    <div style="text-align:center;color:var(--text-muted);font-size:11px;margin:auto;">Memory index tracking active interactions</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Center Active Chat Interface -->
+        <main class="workspace-center">
+            <div class="stream-container" id="stream-container">
+                
+                <div class="welcome-hero" id="welcome-hero">
+                    <h2>Virtual Student Support Interface</h2>
+                    <p>Submit inquiries regarding NSBM Green University admissions, academic pathways, payment guidelines, or campus systems. The architecture actively computes sentiment parameters via heuristic stabilization and moving-average parameter smoothing.</p>
+                    
+                    <div class="section-heading" style="margin-bottom:16px;text-align:left;">Suggested Inquiry Scenarios</div>
+                    <div class="preset-grid">
+                        <div class="preset-card" onclick="insertPreset(this)">
+                            <h4>Fee Payment Methods <span style="color:var(--nsbm-teal)">↗</span></h4>
+                            <p>Retrieve structured guidelines on cash and portal payment pipelines.</p>
+                        </div>
+                        <div class="preset-card" onclick="insertPreset(this)">
+                            <h4>Pending A/L Policy <span style="color:var(--nsbm-teal)">↗</span></h4>
+                            <p>Examine eligibility thresholds for incomplete academic evaluations.</p>
+                        </div>
+                        <div class="preset-card" onclick="insertPreset(this)">
+                            <h4>Late Verification Stress <span style="color:var(--emotion-joy)">↗</span></h4>
+                            <p>Observe empathetic parameter stabilization via financial urgency triggers.</p>
+                        </div>
+                        <div class="preset-card" onclick="insertPreset(this)">
+                            <h4>Orientation Procedures <span style="color:var(--nsbm-cyan)">↗</span></h4>
+                            <p>Engage higher temperature creative sampling across onboarding contexts.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="composer-section">
+                <div class="input-box">
+                    <textarea id="composer-input" rows="1" placeholder="Enter inquiry context..." onkeydown="handleComposer(event)" oninput="autoGrow(this)"></textarea>
+                    <button class="btn-submit" id="btn-submit" onclick="dispatchInquiry()" title="Transmit Inquiry">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Hyperparameter & Smoothing Function Analytics Sidebar -->
+        <aside class="sidebar-right">
+            <div class="section-heading">Hyperparameter Smoothing Graph</div>
+            
+            <div class="analytics-panel">
+                
+                <!-- Charting Container -->
+                <div class="chart-box">
+                    <h4>Dynamic Smoothing Trajectories</h4>
+                    <p class="desc">Plots moving-average variation across sequential message turns</p>
+                    <div class="chart-container">
+                        <canvas id="hyperparamChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Instant Parameter State -->
+                <div class="chart-box">
+                    <h4>Inference Token Tuning</h4>
+                    <p class="desc">Instantaneous hyperparameter mapping output</p>
+                    <div class="param-grid">
+                        <div class="param-card">
+                            <span class="lbl">Temperature</span>
+                            <span class="val" id="val-temp">0.50</span>
+                        </div>
+                        <div class="param-card">
+                            <span class="lbl">Top-P</span>
+                            <span class="val" id="val-topp">0.85</span>
+                        </div>
+                        <div class="param-card">
+                            <span class="lbl">Top-K</span>
+                            <span class="val" id="val-topk">60</span>
+                        </div>
+                        <div class="param-card">
+                            <span class="lbl">Rep. Penalty</span>
+                            <span class="val" id="val-rep">1.10</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Sentiment Profile -->
+                <div class="sentiment-card">
+                    <h4>HAG Override Classifier</h4>
+                    <div class="sentiment-profile">
+                        <div class="emotion-name" id="profile-emotion">
+                            <span style="color:var(--text-muted)">—</span>
+                        </div>
+                        <div class="task-badge" id="profile-task">Neutral</div>
+                    </div>
+                    <div class="conf-wrapper">
+                        <div class="conf-hdr">
+                            <span>Classification Confidence</span>
+                            <span id="profile-conf">0.0%</span>
+                        </div>
+                        <div class="conf-track">
+                            <div class="conf-bar" id="conf-bar-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+
+    </div>
+
+    <script>
+        const API_BASE = '/api/v1';
+        const streamContainer = document.getElementById('stream-container');
+        const composerInput = document.getElementById('composer-input');
+        const btnSubmit = document.getElementById('btn-submit');
+        
+        let activeProcess = false;
+        let turnCounter = 0;
+
+        // Chart.js Configuration for Dynamic Trajectories
+        let hyperChart = null;
+        const chartLabels = ['T0'];
+        const tempData = [0.5];
+        const topPData = [0.85];
+
+        function initChart() {
+            const ctx = document.getElementById('hyperparamChart').getContext('2d');
+            hyperChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: chartLabels,
+                    datasets: [
+                        {
+                            label: 'Temperature',
+                            data: tempData,
+                            borderColor: '#0d9488',
+                            backgroundColor: 'rgba(13, 148, 136, 0.1)',
+                            borderWidth: 2,
+                            tension: 0.3,
+                            fill: true,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            pointBackgroundColor: '#0d9488'
+                        },
+                        {
+                            label: 'Top-P',
+                            data: topPData,
+                            borderColor: '#06b6d4',
+                            backgroundColor: 'transparent',
+                            borderWidth: 2,
+                            borderDash: [4, 4],
+                            tension: 0.3,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            pointBackgroundColor: '#06b6d4'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(255,255,255,0.03)' },
+                            ticks: { color: '#64748b', font: { size: 9 } }
+                        },
+                        y: {
+                            min: 0.1,
+                            max: 1.0,
+                            grid: { color: 'rgba(255,255,255,0.03)' },
+                            ticks: { color: '#64748b', font: { size: 9 } }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: { color: '#94a3b8', boxWidth: 10, font: { size: 10 } }
+                        },
+                        tooltip: {
+                            backgroundColor: '#13181b',
+                            titleColor: '#f1f5f9',
+                            bodyColor: '#94a3b8',
+                            borderColor: '#232b30',
+                            borderWidth: 1
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateChart(newTemp, newTopP) {
+            turnCounter++;
+            const lbl = 'T' + turnCounter;
+            
+            // Push values
+            chartLabels.push(lbl);
+            tempData.push(newTemp);
+            topPData.push(newTopP);
+
+            // Keep max 8 visible history turns to maintain visual dashboard clarity
+            if (chartLabels.length > 8) {
+                chartLabels.shift();
+                tempData.shift();
+                topPData.shift();
+            }
+
+            hyperChart.update();
+        }
+
+        // ── Node System Health Verification ──
+        async function fetchSystemHealth() {
+            try {
+                const res = await fetch(`${API_BASE}/health`);
+                const data = await res.json();
+                
+                const isOllamaUp = data.ollama.includes('available') || data.ollama.includes('connected');
+                document.getElementById('status-ollama').textContent = isOllamaUp ? 'ONLINE' : 'DEGRADED';
+                document.getElementById('status-ollama').className = 'status-tag ' + (isOllamaUp ? 'ok' : 'err');
+                
+                document.getElementById('status-chroma').textContent = data.chromadb === 'connected' ? 'CONNECTED' : 'ERROR';
+                document.getElementById('status-chroma').className = 'status-tag ' + (data.chromadb === 'connected' ? 'ok' : 'err');
+                
+                document.getElementById('model-lbl').textContent = data.ollama_model || 'llama3.1';
+                document.getElementById('kb-count').textContent = (data.knowledge_base_docs || 64) + ' Chunks';
+
+                // Fetch real memory details to populate custom left stack
+                fetchMemoryStream();
+            } catch (err) {
+                console.error("Diagnostics check failed", err);
+            }
+        }
+
+        async function fetchMemoryStream() {
+            try {
+                const res = await fetch(`${API_BASE}/memory`);
+                const data = await res.json();
+                const memStream = document.getElementById('memory-stream');
+                
+                if (data.entries && data.entries.length > 0) {
+                    memStream.innerHTML = '';
+                    // Display entries starting from most recent
+                    data.entries.slice().reverse().forEach(item => {
+                        const div = document.createElement('div');
+                        div.className = 'memory-item';
+                        // Extract text snippet safely
+                        const docStr = item.document || '';
+                        const lines = docStr.split('\n');
+                        const promptText = lines[0].replace('Prompt:', '').trim() || 'Inquiry Context';
+                        div.innerHTML = `<span class="task-tag">${item.task_type || 'Context'}</span> ${escapeString(promptText)}`;
+                        memStream.appendChild(div);
+                    });
+                } else {
+                    memStream.innerHTML = '<div style="text-align:center;color:var(--text-muted);font-size:11px;margin:auto;">Memory buffer clean</div>';
+                }
+            } catch (e) {}
+        }
+
+        async function clearMemoryStream() {
+            try {
+                await fetch(`${API_BASE}/memory`, { method: 'DELETE' });
+                fetchMemoryStream();
+            } catch (e) {}
+        }
+
+        // ── Main Inquiry Execution Pipeline ──
+        async function dispatchInquiry() {
+            const query = composerInput.value.trim();
+            if (!query || activeProcess) return;
+            
+            activeProcess = true;
+            btnSubmit.disabled = true;
+
+            // Dismantle preview interface if standing
+            const hero = document.getElementById('welcome-hero');
+            if (hero) hero.remove();
+
+            // Populate user outgoing bubble
+            appendStreamBubble(query, 'user');
+            composerInput.value = '';
+            autoGrow(composerInput);
+
+            // Engage typing pipeline state
+            const trackerId = appendTypingLoader();
+
+            try {
+                const res = await fetch(`${API_BASE}/query`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: query, top_k: 3 })
+                });
+                const payload = await res.json();
+                
+                removeBubble(trackerId);
+
+                if (res.ok) {
+                    appendStreamBubble(payload.response, 'system', payload);
+                    syncSidebarAnalytics(payload);
+                    fetchSystemHealth(); // sync metadata stores
+                } else {
+                    appendStreamBubble(`Pipeline dispatch failure: ${payload.error || 'Interface timeout'}`, 'system');
+                }
+            } catch (err) {
+                removeBubble(trackerId);
+                appendStreamBubble("System transmission error. Ensure backend service executes on port 5001.", 'system');
+            }
+
+            activeProcess = false;
+            btnSubmit.disabled = false;
+            composerInput.focus();
+        }
+
+        function appendStreamBubble(text, origin, metaPayload) {
+            const wrapper = document.createElement('div');
+            wrapper.className = `message-row ${origin}`;
+            
+            let metaElements = '';
+            if (metaPayload) {
+                const latency = metaPayload.processing_time_seconds ? `${metaPayload.processing_time_seconds}s inference` : '';
+                const styleDot = getEmotionColor(metaPayload.emotion);
+                metaElements = `
+                    <div class="bubble-meta">
+                        <span class="meta-tag" style="color:${styleDot}">● ${metaPayload.emotion.toUpperCase()}</span>
+                        <span>|</span>
+                        <span class="meta-tag">Profile: ${metaPayload.task_type}</span>
+                        <span>|</span>
+                        <span>${latency}</span>
+                    </div>
+                `;
+            }
+
+            const avatarText = origin === 'user' ? 'U' : 'NS';
+            
+            wrapper.innerHTML = `
+                <div class="bubble-avatar" style="font-size:11px;font-weight:700;color:var(--text-secondary)">${avatarText}</div>
+                <div class="bubble-content">
+                    <div class="bubble-card">${formatParagraphs(text)}</div>
+                    ${metaElements}
+                </div>
+            `;
+            
+            streamContainer.appendChild(wrapper);
+            streamContainer.scrollTop = streamContainer.scrollHeight;
+        }
+
+        function appendTypingLoader() {
+            const uid = 'loader-' + Date.now();
+            const wrapper = document.createElement('div');
+            wrapper.className = 'message-row system';
+            wrapper.id = uid;
+            wrapper.innerHTML = `
+                <div class="bubble-avatar" style="font-size:11px;font-weight:700;color:var(--text-secondary)">NS</div>
+                <div class="bubble-content">
+                    <div class="bubble-card" style="padding:12px 20px;">
+                        <div class="typing-dots"><span></span><span></span><span></span></div>
+                    </div>
+                </div>
+            `;
+            streamContainer.appendChild(wrapper);
+            streamContainer.scrollTop = streamContainer.scrollHeight;
+            return uid;
+        }
+
+        function removeBubble(id) {
+            const item = document.getElementById(id);
+            if (item) item.remove();
+        }
+
+        // ── Right Sidebar Analytics Sync ──
+        function syncSidebarAnalytics(payload) {
+            if (!payload || !payload.hyperparameters) return;
+            const hp = payload.hyperparameters;
+            
+            // Sync readouts
+            document.getElementById('val-temp').textContent = hp.temperature.toFixed(2);
+            document.getElementById('val-topp').textContent = hp.top_p.toFixed(2);
+            document.getElementById('val-topk').textContent = hp.top_k;
+            document.getElementById('val-rep').textContent = hp.repetition_penalty.toFixed(2);
+
+            // Sync sentiment card profile
+            const emColor = getEmotionColor(payload.emotion);
+            document.getElementById('profile-emotion').innerHTML = `<span style="color:${emColor}">●</span> ${payload.emotion}`;
+            document.getElementById('profile-task').textContent = payload.task_type;
+            
+            const confPct = (payload.confidence * 100).toFixed(1);
+            document.getElementById('profile-conf').textContent = confPct + '%';
+            document.getElementById('conf-bar-fill').style.width = Math.min(Math.round(payload.confidence * 100), 100) + '%';
+
+            // Propagate dynamic smoothing mapping to Chart.js
+            updateChart(hp.temperature, hp.top_p);
+        }
+
+        // ── UI Helper Utilities ──
+        function insertPreset(cardElement) {
+            const textDesc = cardElement.querySelector('h4').textContent.replace('↗', '').trim();
+            const mapper = {
+                "Fee Payment Methods": "What are the available fee payment methods at NSBM Green University and what are the cashier hours?",
+                "Pending A/L Policy": "What are the policies for students with pending A/L results?",
+                "Late Verification Stress": "I am panicking and so stressed! I paid my fees 2 days ago but still haven't received any payment verification! What should I do?",
+                "Orientation Procedures": "Hey there! Could you tell me a little bit about what happens during the orientation program for new students?"
+            };
+            composerInput.value = mapper[textDesc] || textDesc;
+            composerInput.focus();
+            autoGrow(composerInput);
+        }
+
+        function getEmotionColor(emotionStr) {
+            const colors = {
+                joy: 'var(--emotion-joy)',
+                sadness: 'var(--emotion-sadness)',
+                anger: 'var(--emotion-anger)',
+                fear: 'var(--emotion-fear)',
+                surprise: 'var(--emotion-surprise)',
+                love: 'var(--emotion-love)'
+            };
+            return colors[emotionStr?.toLowerCase()] || 'var(--nsbm-cyan)';
+        }
+
+        function formatParagraphs(rawStr) {
+            return escapeString(rawStr)
+                .split('\n\n')
+                .map(p => p.trim() ? `<p style="margin-bottom:8px;">${p.replace(/\n/g, '<br>')}</p>` : '')
+                .join('')
+                .replace(/<\/p>$/, '');
+        }
+
+        function escapeString(str) {
+            return str.replace(/&/g, '&amp;')
+                      .replace(/</g, '&lt;')
+                      .replace(/>/g, '&gt;')
+                      .replace(/"/g, '&quot;')
+                      .replace(/'/g, '&#039;');
+        }
+
+        function handleComposer(evt) {
+            if (evt.key === 'Enter' && !evt.shiftKey) {
+                evt.preventDefault();
+                dispatchInquiry();
+            }
+        }
+
+        function autoGrow(el) {
+            el.style.height = 'auto';
+            el.style.height = Math.min(el.scrollHeight, 150) + 'px';
+        }
+
+        // System Startup Activation Hooks
+        window.addEventListener('DOMContentLoaded', () => {
+            initChart();
+            fetchSystemHealth();
+            setInterval(fetchSystemHealth, 30000);
+        });
+    </script>
+</body>
+</html>

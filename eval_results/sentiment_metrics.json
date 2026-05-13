@@ -1,0 +1,511 @@
+{
+  "without_overrides": {
+    "accuracy": 63.3,
+    "total": 30,
+    "correct": 19,
+    "per_class": {
+      "factual": {
+        "precision": 0.714,
+        "recall": 0.357,
+        "f1": 0.476,
+        "support": 14
+      },
+      "creative": {
+        "precision": 0.615,
+        "recall": 0.8,
+        "f1": 0.696,
+        "support": 10
+      },
+      "emotional": {
+        "precision": 0.6,
+        "recall": 1.0,
+        "f1": 0.75,
+        "support": 6
+      }
+    },
+    "confusion_matrix": {
+      "factual": {
+        "factual": 5,
+        "creative": 5,
+        "emotional": 4
+      },
+      "creative": {
+        "factual": 2,
+        "creative": 8,
+        "emotional": 0
+      },
+      "emotional": {
+        "factual": 0,
+        "creative": 0,
+        "emotional": 6
+      }
+    }
+  },
+  "with_overrides": {
+    "accuracy": 80.0,
+    "total": 30,
+    "correct": 24,
+    "per_class": {
+      "factual": {
+        "precision": 0.75,
+        "recall": 0.857,
+        "f1": 0.8,
+        "support": 14
+      },
+      "creative": {
+        "precision": 0.9,
+        "recall": 0.9,
+        "f1": 0.9,
+        "support": 10
+      },
+      "emotional": {
+        "precision": 0.75,
+        "recall": 0.5,
+        "f1": 0.6,
+        "support": 6
+      }
+    },
+    "confusion_matrix": {
+      "factual": {
+        "factual": 12,
+        "creative": 1,
+        "emotional": 1
+      },
+      "creative": {
+        "factual": 1,
+        "creative": 9,
+        "emotional": 0
+      },
+      "emotional": {
+        "factual": 3,
+        "creative": 0,
+        "emotional": 3
+      }
+    }
+  },
+  "improvement": 16.7,
+  "detailed_raw": [
+    {
+      "query": "What are the core subjects offered in the Computer Science degree?",
+      "expected": "factual",
+      "predicted": "creative",
+      "emotion": "joy",
+      "confidence": 0.8547914028167725
+    },
+    {
+      "query": "How long is the Software Engineering degree?",
+      "expected": "factual",
+      "predicted": "factual",
+      "emotion": "anger",
+      "confidence": 0.4439852833747864
+    },
+    {
+      "query": "What is the dean's message?",
+      "expected": "factual",
+      "predicted": "factual",
+      "emotion": "anger",
+      "confidence": 0.8804725408554077
+    },
+    {
+      "query": "What are the degree transfer policies?",
+      "expected": "factual",
+      "predicted": "factual",
+      "emotion": "anger",
+      "confidence": 0.8158532381057739
+    },
+    {
+      "query": "How can I get a student ID card?",
+      "expected": "factual",
+      "predicted": "emotional",
+      "emotion": "fear",
+      "confidence": 0.48729297518730164
+    },
+    {
+      "query": "What courses does NSBM offer?",
+      "expected": "factual",
+      "predicted": "factual",
+      "emotion": "anger",
+      "confidence": 0.6326085329055786
+    },
+    {
+      "query": "Where is NSBM located?",
+      "expected": "factual",
+      "predicted": "emotional",
+      "emotion": "fear",
+      "confidence": 0.7449096441268921
+    },
+    {
+      "query": "What is the late payment penalty?",
+      "expected": "factual",
+      "predicted": "factual",
+      "emotion": "anger",
+      "confidence": 0.9511352777481079
+    },
+    {
+      "query": "Tell me about the Faculty of Computing departments",
+      "expected": "factual",
+      "predicted": "creative",
+      "emotion": "joy",
+      "confidence": 0.8503671288490295
+    },
+    {
+      "query": "What are the enrollment requirements?",
+      "expected": "factual",
+      "predicted": "emotional",
+      "emotion": "fear",
+      "confidence": 0.5196685791015625
+    },
+    {
+      "query": "I am really stressed out because I don't know the late payment penalty policy. I'm afraid I might get dropped.",
+      "expected": "emotional",
+      "predicted": "emotional",
+      "emotion": "fear",
+      "confidence": 0.6542035937309265
+    },
+    {
+      "query": "I failed my last module and I am very depressed. What is the policy for retaking?",
+      "expected": "emotional",
+      "predicted": "emotional",
+      "emotion": "sadness",
+      "confidence": 0.9984890222549438
+    },
+    {
+      "query": "I'm so worried about my grades this semester, I feel like giving up.",
+      "expected": "emotional",
+      "predicted": "emotional",
+      "emotion": "sadness",
+      "confidence": 0.9190303683280945
+    },
+    {
+      "query": "I feel so alone and lost on campus. Is there counselling support?",
+      "expected": "emotional",
+      "predicted": "emotional",
+      "emotion": "sadness",
+      "confidence": 0.9989864230155945
+    },
+    {
+      "query": "I am scared I won't be able to afford next semester's fees.",
+      "expected": "emotional",
+      "predicted": "emotional",
+      "emotion": "fear",
+      "confidence": 0.9959900975227356
+    },
+    {
+      "query": "I just got my acceptance letter and I'm so excited! What facilities does computing have?",
+      "expected": "creative",
+      "predicted": "creative",
+      "emotion": "joy",
+      "confidence": 0.9983165264129639
+    },
+    {
+      "query": "Wow, I didn't expect to get a scholarship! What are the next steps?",
+      "expected": "creative",
+      "predicted": "creative",
+      "emotion": "joy",
+      "confidence": 0.9866710305213928
+    },
+    {
+      "query": "I am so happy I got into NSBM! This is amazing!",
+      "expected": "creative",
+      "predicted": "creative",
+      "emotion": "joy",
+      "confidence": 0.9524684548377991
+    },
+    {
+      "query": "I love this university! The campus is beautiful!",
+      "expected": "creative",
+      "predicted": "creative",
+      "emotion": "joy",
+      "confidence": 0.997376561164856
+    },
+    {
+      "query": "Just passed all my exams with flying colors! I'm thrilled!",
+      "expected": "creative",
+      "predicted": "creative",
+      "emotion": "joy",
+      "confidence": 0.9988995790481567
+    },
+    {
+      "query": "Hi",
+      "expected": "creative",
+      "predicted": "factual",
+      "emotion": "anger",
+      "confidence": 0.36308005452156067
+    },
+    {
+      "query": "Hello!",
+      "expected": "creative",
+      "predicted": "creative",
+      "emotion": "joy",
+      "confidence": 0.8868355751037598
+    },
+    {
+      "query": "Good morning",
+      "expected": "creative",
+      "predicted": "creative",
+      "emotion": "joy",
+      "confidence": 0.9950147271156311
+    },
+    {
+      "query": "Hey there",
+      "expected": "creative",
+      "predicted": "factual",
+      "emotion": "anger",
+      "confidence": 0.5626305341720581
+    },
+    {
+      "query": "Thanks",
+      "expected": "creative",
+      "predicted": "creative",
+      "emotion": "joy",
+      "confidence": 0.9713891744613647
+    },
+    {
+      "query": "I am happy I passed but anxious about the tuition fee deadline.",
+      "expected": "emotional",
+      "predicted": "emotional",
+      "emotion": "fear",
+      "confidence": 0.7095069885253906
+    },
+    {
+      "query": "Oh great, another fee increase. How much now?",
+      "expected": "factual",
+      "predicted": "creative",
+      "emotion": "joy",
+      "confidence": 0.9266544580459595
+    },
+    {
+      "query": "ok",
+      "expected": "factual",
+      "predicted": "creative",
+      "emotion": "joy",
+      "confidence": 0.8803219199180603
+    },
+    {
+      "query": "hmm",
+      "expected": "factual",
+      "predicted": "emotional",
+      "emotion": "fear",
+      "confidence": 0.6318028569221497
+    },
+    {
+      "query": "yes",
+      "expected": "factual",
+      "predicted": "creative",
+      "emotion": "joy",
+      "confidence": 0.4411446750164032
+    }
+  ],
+  "detailed_fixed": [
+    {
+      "query": "What are the core subjects offered in the Computer Science degree?",
+      "expected": "factual",
+      "predicted": "factual",
+      "emotion": "joy",
+      "confidence": 0.8547914028167725
+    },
+    {
+      "query": "How long is the Software Engineering degree?",
+      "expected": "factual",
+      "predicted": "factual",
+      "emotion": "anger",
+      "confidence": 0.4439852833747864
+    },
+    {
+      "query": "What is the dean's message?",
+      "expected": "factual",
+      "predicted": "factual",
+      "emotion": "anger",
+      "confidence": 0.8804725408554077
+    },
+    {
+      "query": "What are the degree transfer policies?",
+      "expected": "factual",
+      "predicted": "factual",
+      "emotion": "anger",
+      "confidence": 0.8158532381057739
+    },
+    {
+      "query": "How can I get a student ID card?",
+      "expected": "factual",
+      "predicted": "factual",
+      "emotion": "fear",
+      "confidence": 0.48729297518730164
+    },
+    {
+      "query": "What courses does NSBM offer?",
+      "expected": "factual",
+      "predicted": "factual",
+      "emotion": "anger",
+      "confidence": 0.6326085329055786
+    },
+    {
+      "query": "Where is NSBM located?",
+      "expected": "factual",
+      "predicted": "factual",
+      "emotion": "fear",
+      "confidence": 0.7449096441268921
+    },
+    {
+      "query": "What is the late payment penalty?",
+      "expected": "factual",
+      "predicted": "factual",
+      "emotion": "anger",
+      "confidence": 0.9511352777481079
+    },
+    {
+      "query": "Tell me about the Faculty of Computing departments",
+      "expected": "factual",
+      "predicted": "factual",
+      "emotion": "joy",
+      "confidence": 0.8503671288490295
+    },
+    {
+      "query": "What are the enrollment requirements?",
+      "expected": "factual",
+      "predicted": "factual",
+      "emotion": "fear",
+      "confidence": 0.5196685791015625
+    },
+    {
+      "query": "I am really stressed out because I don't know the late payment penalty policy. I'm afraid I might get dropped.",
+      "expected": "emotional",
+      "predicted": "emotional",
+      "emotion": "fear",
+      "confidence": 0.6542035937309265
+    },
+    {
+      "query": "I failed my last module and I am very depressed. What is the policy for retaking?",
+      "expected": "emotional",
+      "predicted": "factual",
+      "emotion": "sadness",
+      "confidence": 0.9984890222549438
+    },
+    {
+      "query": "I'm so worried about my grades this semester, I feel like giving up.",
+      "expected": "emotional",
+      "predicted": "emotional",
+      "emotion": "sadness",
+      "confidence": 0.9190303683280945
+    },
+    {
+      "query": "I feel so alone and lost on campus. Is there counselling support?",
+      "expected": "emotional",
+      "predicted": "emotional",
+      "emotion": "sadness",
+      "confidence": 0.9989864230155945
+    },
+    {
+      "query": "I am scared I won't be able to afford next semester's fees.",
+      "expected": "emotional",
+      "predicted": "factual",
+      "emotion": "fear",
+      "confidence": 0.9959900975227356
+    },
+    {
+      "query": "I just got my acceptance letter and I'm so excited! What facilities does computing have?",
+      "expected": "creative",
+      "predicted": "creative",
+      "emotion": "joy",
+      "confidence": 0.9983165264129639
+    },
+    {
+      "query": "Wow, I didn't expect to get a scholarship! What are the next steps?",
+      "expected": "creative",
+      "predicted": "creative",
+      "emotion": "joy",
+      "confidence": 0.9866710305213928
+    },
+    {
+      "query": "I am so happy I got into NSBM! This is amazing!",
+      "expected": "creative",
+      "predicted": "creative",
+      "emotion": "joy",
+      "confidence": 0.9524684548377991
+    },
+    {
+      "query": "I love this university! The campus is beautiful!",
+      "expected": "creative",
+      "predicted": "creative",
+      "emotion": "joy",
+      "confidence": 0.997376561164856
+    },
+    {
+      "query": "Just passed all my exams with flying colors! I'm thrilled!",
+      "expected": "creative",
+      "predicted": "creative",
+      "emotion": "joy",
+      "confidence": 0.9988995790481567
+    },
+    {
+      "query": "Hi",
+      "expected": "creative",
+      "predicted": "creative",
+      "emotion": "neutral",
+      "confidence": 0.36308005452156067
+    },
+    {
+      "query": "Hello!",
+      "expected": "creative",
+      "predicted": "creative",
+      "emotion": "neutral",
+      "confidence": 0.8868355751037598
+    },
+    {
+      "query": "Good morning",
+      "expected": "creative",
+      "predicted": "creative",
+      "emotion": "neutral",
+      "confidence": 0.9950147271156311
+    },
+    {
+      "query": "Hey there",
+      "expected": "creative",
+      "predicted": "factual",
+      "emotion": "neutral",
+      "confidence": 0.5626305341720581
+    },
+    {
+      "query": "Thanks",
+      "expected": "creative",
+      "predicted": "creative",
+      "emotion": "neutral",
+      "confidence": 0.9713891744613647
+    },
+    {
+      "query": "I am happy I passed but anxious about the tuition fee deadline.",
+      "expected": "emotional",
+      "predicted": "factual",
+      "emotion": "fear",
+      "confidence": 0.7095069885253906
+    },
+    {
+      "query": "Oh great, another fee increase. How much now?",
+      "expected": "factual",
+      "predicted": "factual",
+      "emotion": "joy",
+      "confidence": 0.9266544580459595
+    },
+    {
+      "query": "ok",
+      "expected": "factual",
+      "predicted": "creative",
+      "emotion": "neutral",
+      "confidence": 0.8803219199180603
+    },
+    {
+      "query": "hmm",
+      "expected": "factual",
+      "predicted": "emotional",
+      "emotion": "fear",
+      "confidence": 0.6318028569221497
+    },
+    {
+      "query": "yes",
+      "expected": "factual",
+      "predicted": "factual",
+      "emotion": "joy",
+      "confidence": 0.4411446750164032
+    }
+  ]
+}

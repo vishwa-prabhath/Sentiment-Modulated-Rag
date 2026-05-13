@@ -1,0 +1,2 @@
+model,total_samples,correct_predictions,overall_accuracy,timestamp,factual_count,factual_accuracy,creative_count,creative_accuracy,emotional_count,emotional_accuracy
+gpt2_your_hag,200,89,0.445,20250708_113802,18,0.5,2,0.5,180,0.4388888888888889

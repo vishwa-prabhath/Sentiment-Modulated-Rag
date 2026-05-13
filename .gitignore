@@ -1,0 +1,30 @@
+# Virtual Environments
+venv/
+venv310/
+venv312/
+env/
+.env
+
+# Cache & Compiled Files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Vector Database storage (User instantiates locally via auto-ingest)
+unified_chroma_store/
+
+# Large binaries & Scratch/Internal docs
+*.pdf
+!RAG_V2/*.pdf
+*.docx
+*.numbers
+pdf_text.txt

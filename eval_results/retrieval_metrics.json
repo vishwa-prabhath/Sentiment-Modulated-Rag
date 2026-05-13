@@ -1,0 +1,273 @@
+{
+  "total_queries": 41,
+  "kb_chunks": 64,
+  "hit_rate_at_1": 100.0,
+  "hit_rate_at_3": 100.0,
+  "hit_rate_at_5": 100.0,
+  "mrr": 1.0,
+  "per_category": {
+    "Academic Support": 100.0,
+    "Academics": 100.0,
+    "Accommodation": 100.0,
+    "Admissions": 100.0,
+    "Career Services": 100.0,
+    "Certificates": 100.0,
+    "Engineering Services": 100.0,
+    "Facilities": 100.0,
+    "Faculty Services": 100.0,
+    "Financial Aid": 100.0,
+    "IT Support": 100.0,
+    "Orientation": 100.0,
+    "Payments": 100.0,
+    "Registration": 100.0,
+    "Transportation": 100.0
+  },
+  "detailed_results": [
+    {
+      "question": "What are the intake inquiry procedures and what information is provided during i",
+      "category": "Admissions",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Admissions\nDepartment: Marketing\nQuestion: What are the intake inquiry procedures and what"
+    },
+    {
+      "question": "What are the degree transfer policies at NSBM Green University?",
+      "category": "Admissions",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Admissions\nDepartment: Marketing\nQuestion: What are the degree transfer policies at NSBM G"
+    },
+    {
+      "question": "What are the age restrictions for enrollment at NSBM Green University?",
+      "category": "Admissions",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Admissions\nDepartment: Marketing\nQuestion: What are the age restrictions for enrollment at"
+    },
+    {
+      "question": "What are the requirements for on-the-spot registrations?",
+      "category": "Admissions",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Admissions\nDepartment: Marketing\nQuestion: What are the requirements for on-the-spot regis"
+    },
+    {
+      "question": "What are the policies for students with pending A/L results?",
+      "category": "Admissions",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Admissions\nDepartment: Marketing\nQuestion: What are the policies for students with pending"
+    },
+    {
+      "question": "Can students switch between Plymouth, Victoria University, and UGC programs?",
+      "category": "Admissions",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Admissions\nDepartment: Marketing\nQuestion: Can students switch between Plymouth, Victoria "
+    },
+    {
+      "question": "Does NSBM Green University offer part-time programs?",
+      "category": "Admissions",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Admissions\nDepartment: Marketing\nQuestion: Does NSBM Green University offer part-time prog"
+    },
+    {
+      "question": "Can prospective students meet lecturers and department heads during open days?",
+      "category": "Admissions",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Admissions\nDepartment: Marketing\nQuestion: Can prospective students meet lecturers and dep"
+    },
+    {
+      "question": "What information is provided about course structures, modules, and credits?",
+      "category": "Academics",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Academics\nDepartment: Marketing\nQuestion: What information is provided about course struct"
+    },
+    {
+      "question": "Is online registration available at NSBM Green University?",
+      "category": "Registration",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Registration\nDepartment: Marketing\nQuestion: Is online registration available at NSBM Gree"
+    },
+    {
+      "question": "What are the procedures for late registrations?",
+      "category": "Registration",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Registration\nDepartment: Marketing\nQuestion: What are the procedures for late registration"
+    },
+    {
+      "question": "Can students verify certificates from Plymouth and Victoria University?",
+      "category": "Certificates",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Certificates\nDepartment: Marketing\nQuestion: Can students verify certificates from Plymout"
+    },
+    {
+      "question": "What is the purpose of the orientation program?",
+      "category": "Orientation",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Orientation\nDepartment: Marketing\nQuestion: What is the purpose of the orientation program"
+    },
+    {
+      "question": "What are the available fee payment methods at NSBM Green University?",
+      "category": "Payments",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Payments\nDepartment: Marketing\nQuestion: What are the available fee payment methods at NSB"
+    },
+    {
+      "question": "What is the payment schedule for foundation and degree programs?",
+      "category": "Payments",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Payments\nDepartment: Marketing\nQuestion: What is the payment schedule for foundation and d"
+    },
+    {
+      "question": "What is the verification process for online and bank payments?",
+      "category": "Payments",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Payments\nDepartment: Marketing\nQuestion: What is the verification process for online and b"
+    },
+    {
+      "question": "What should students do if payment verification is not received within 24 hours?",
+      "category": "Payments",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Payments\nDepartment: Marketing\nQuestion: What should students do if payment verification i"
+    },
+    {
+      "question": "Are scholarships available at NSBM Green University?",
+      "category": "Financial Aid",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Financial Aid\nDepartment: Marketing\nQuestion: Are scholarships available at NSBM Green Uni"
+    },
+    {
+      "question": "What loan options are available for students?",
+      "category": "Financial Aid",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Financial Aid\nDepartment: Marketing\nQuestion: What loan options are available for students"
+    },
+    {
+      "question": "Is MOHE funding available for students?",
+      "category": "Financial Aid",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Financial Aid\nDepartment: Marketing\nQuestion: Is MOHE funding available for students?\nAnsw"
+    },
+    {
+      "question": "What transportation services are available at NSBM Green University?",
+      "category": "Transportation",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Transportation\nDepartment: Marketing\nQuestion: What transportation services are available "
+    },
+    {
+      "question": "What career guidance services are available?",
+      "category": "Career Services",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Career Services\nDepartment: Marketing\nQuestion: What career guidance services are availabl"
+    },
+    {
+      "question": "What accommodation options are available for students?",
+      "category": "Accommodation",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Accommodation\nDepartment: Marketing\nQuestion: What accommodation options are available for"
+    },
+    {
+      "question": "What IT support services are available for students?",
+      "category": "IT Support",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: IT Support\nDepartment: IT\nQuestion: What IT support services are available for students?\nA"
+    },
+    {
+      "question": "How can students get replacement student ID cards?",
+      "category": "IT Support",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: IT Support\nDepartment: IT\nQuestion: How can students get replacement student ID cards?\nAns"
+    },
+    {
+      "question": "What should students do if their student cards are blocked?",
+      "category": "IT Support",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: IT Support\nDepartment: IT\nQuestion: What should students do if their student cards are blo"
+    },
+    {
+      "question": "How can students get letters for confirmation and visa requirements?",
+      "category": "Academic Support",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Academic Support\nDepartment: Accounting & Finance\nQuestion: How can students get letters f"
+    },
+    {
+      "question": "What are the policies for hostel and course fee refunds?",
+      "category": "Academic Support",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Academic Support\nDepartment: Accounting & Finance\nQuestion: What are the policies for host"
+    },
+    {
+      "question": "What refund forms are available to students?",
+      "category": "Academic Support",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Academic Support\nDepartment: Accounting & Finance\nQuestion: What refund forms are availabl"
+    },
+    {
+      "question": "How are payment issues resolved after making payments?",
+      "category": "Academic Support",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Academic Support\nDepartment: Accounting & Finance\nQuestion: How are payment issues resolve"
+    },
+    {
+      "question": "Where can students get help with subject-related educational issues?",
+      "category": "Academic Support",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Academic Support\nDepartment: Accounting & Finance\nQuestion: Where can students get help wi"
+    },
+    {
+      "question": "What facilities and services are available during weekends?",
+      "category": "Facilities",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Facilities\nDepartment: Computer Science\nQuestion: What facilities and services are availab"
+    },
+    {
+      "question": "How can students submit documents about low attendance?",
+      "category": "Facilities",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Facilities\nDepartment: Computer Science\nQuestion: How can students submit documents about "
+    },
+    {
+      "question": "What guidance is available for repeat examinations?",
+      "category": "Facilities",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Facilities\nDepartment: Computer Science\nQuestion: What guidance is available for repeat ex"
+    },
+    {
+      "question": "How can students find lecturers and their current class locations?",
+      "category": "Faculty Services",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Faculty Services\nDepartment: Computer Science\nQuestion: How can students find lecturers an"
+    },
+    {
+      "question": "What should students do if they have complaints about course content?",
+      "category": "Faculty Services",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Faculty Services\nDepartment: Computer Science\nQuestion: What should students do if they ha"
+    },
+    {
+      "question": "What assistance is available for students who cannot pay fees before the deadlin",
+      "category": "Faculty Services",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Faculty Services\nDepartment: Computer Science\nQuestion: What assistance is available for s"
+    },
+    {
+      "question": "What support does the Electrical, Electronic and System Engineering department p",
+      "category": "Engineering Services",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Engineering Services\nDepartment: Electrical Electronic and System Engineering\nQuestion: Wh"
+    },
+    {
+      "question": "How does the engineering department ensure accurate attendance records?",
+      "category": "Engineering Services",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Engineering Services\nDepartment: Electrical Electronic and System Engineering\nQuestion: Ho"
+    },
+    {
+      "question": "What information is provided about semester schedules?",
+      "category": "Engineering Services",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Engineering Services\nDepartment: Electrical Electronic and System Engineering\nQuestion: Wh"
+    },
+    {
+      "question": "How does the department handle inquiries about student activities from parents?",
+      "category": "Engineering Services",
+      "hit_rank": 1,
+      "retrieved_preview": "Category: Engineering Services\nDepartment: Electrical Electronic and System Engineering\nQuestion: Ho"
+    }
+  ]
+}

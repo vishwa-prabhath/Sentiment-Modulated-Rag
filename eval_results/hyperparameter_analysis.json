@@ -1,0 +1,261 @@
+{
+  "summary": {
+    "factual": {
+      "temperature": 0.3,
+      "avg_word_count": 142.6,
+      "avg_type_token_ratio": 0.7517,
+      "avg_empathetic_words": 0.6,
+      "avg_enthusiastic_words": 0.4,
+      "avg_formal_words": 0.0
+    },
+    "emotional": {
+      "temperature": 0.6,
+      "avg_word_count": 126.8,
+      "avg_type_token_ratio": 0.7746,
+      "avg_empathetic_words": 1.0,
+      "avg_enthusiastic_words": 0.0,
+      "avg_formal_words": 0.0
+    },
+    "creative": {
+      "temperature": 0.85,
+      "avg_word_count": 131.0,
+      "avg_type_token_ratio": 0.7054,
+      "avg_empathetic_words": 0.6,
+      "avg_enthusiastic_words": 0.0,
+      "avg_formal_words": 0.2
+    }
+  },
+  "detailed_results": [
+    {
+      "word_count": 104,
+      "unique_words": 79,
+      "type_token_ratio": 0.7596,
+      "avg_word_length": 5.66,
+      "sentence_count": 7,
+      "empathetic_words": 0,
+      "enthusiastic_words": 0,
+      "formal_words": 0,
+      "profile": "factual",
+      "query": "What degree programs does the Faculty of Computing offer?",
+      "response_preview": "According to our information, the Faculty of Computing (FOC) offers University Grants Commission's approved degree programmes in multiple disciplines.",
+      "time_seconds": 8.6
+    },
+    {
+      "word_count": 16,
+      "unique_words": 16,
+      "type_token_ratio": 1.0,
+      "avg_word_length": 6.44,
+      "sentence_count": 1,
+      "empathetic_words": 0,
+      "enthusiastic_words": 0,
+      "formal_words": 0,
+      "profile": "emotional",
+      "query": "What degree programs does the Faculty of Computing offer?",
+      "response_preview": "The Faculty of Computing (FOC) at NSBM Green University offers UGC-approved degree programmes in multiple disciplines.",
+      "time_seconds": 1.1
+    },
+    {
+      "word_count": 19,
+      "unique_words": 18,
+      "type_token_ratio": 0.9474,
+      "avg_word_length": 6.68,
+      "sentence_count": 1,
+      "empathetic_words": 0,
+      "enthusiastic_words": 0,
+      "formal_words": 0,
+      "profile": "creative",
+      "query": "What degree programs does the Faculty of Computing offer?",
+      "response_preview": "The Faculty of Computing (FOC) at NSBM Green University offers University Grants Commission's approved degree programmes in multiple disciplines.",
+      "time_seconds": 0.9
+    },
+    {
+      "word_count": 160,
+      "unique_words": 109,
+      "type_token_ratio": 0.6813,
+      "avg_word_length": 6.08,
+      "sentence_count": 11,
+      "empathetic_words": 0,
+      "enthusiastic_words": 2,
+      "formal_words": 0,
+      "profile": "factual",
+      "query": "Tell me about the departments in the computing faculty.",
+      "response_preview": "In the Faculty of Computing (FOC) at NSBM Green University, we have three exciting departments that cater to different interests and career paths. The",
+      "time_seconds": 5.9
+    },
+    {
+      "word_count": 150,
+      "unique_words": 103,
+      "type_token_ratio": 0.6867,
+      "avg_word_length": 6.18,
+      "sentence_count": 9,
+      "empathetic_words": 0,
+      "enthusiastic_words": 0,
+      "formal_words": 0,
+      "profile": "emotional",
+      "query": "Tell me about the departments in the computing faculty.",
+      "response_preview": "We have three esteemed departments within the Faculty of Computing (FOC) at NSBM Green University. These are:\n\n1. **Department of Computer and Data Sc",
+      "time_seconds": 5.5
+    },
+    {
+      "word_count": 158,
+      "unique_words": 84,
+      "type_token_ratio": 0.5316,
+      "avg_word_length": 6.49,
+      "sentence_count": 10,
+      "empathetic_words": 0,
+      "enthusiastic_words": 0,
+      "formal_words": 0,
+      "profile": "creative",
+      "query": "Tell me about the departments in the computing faculty.",
+      "response_preview": "Welcome to NSBM Green University's Faculty of Computing (FOC)! We're proud to offer a wide range of undergraduate programs in the field of Computing a",
+      "time_seconds": 5.9
+    },
+    {
+      "word_count": 146,
+      "unique_words": 110,
+      "type_token_ratio": 0.7534,
+      "avg_word_length": 5.97,
+      "sentence_count": 10,
+      "empathetic_words": 1,
+      "enthusiastic_words": 0,
+      "formal_words": 0,
+      "profile": "factual",
+      "query": "What is the enrollment process at NSBM?",
+      "response_preview": "Welcome to NSBM Green University! As your helpful university assistant, I'd be happy to guide you through our enrollment process.\n\nTo enroll in one of",
+      "time_seconds": 6.1
+    },
+    {
+      "word_count": 136,
+      "unique_words": 109,
+      "type_token_ratio": 0.8015,
+      "avg_word_length": 6.18,
+      "sentence_count": 18,
+      "empathetic_words": 1,
+      "enthusiastic_words": 0,
+      "formal_words": 0,
+      "profile": "emotional",
+      "query": "What is the enrollment process at NSBM?",
+      "response_preview": "As a helpful university assistant at NSBM Green University, I'd be happy to guide you through the enrollment process!\n\nTo enroll in any programme offe",
+      "time_seconds": 6.0
+    },
+    {
+      "word_count": 156,
+      "unique_words": 113,
+      "type_token_ratio": 0.7244,
+      "avg_word_length": 6.35,
+      "sentence_count": 12,
+      "empathetic_words": 0,
+      "enthusiastic_words": 0,
+      "formal_words": 1,
+      "profile": "creative",
+      "query": "What is the enrollment process at NSBM?",
+      "response_preview": "The enrollment process at NSBM Green University, specifically for the Faculty of Computing, is as follows:\n\n1. **Eligibility Check**: Candidates are r",
+      "time_seconds": 5.9
+    },
+    {
+      "word_count": 152,
+      "unique_words": 119,
+      "type_token_ratio": 0.7829,
+      "avg_word_length": 6.01,
+      "sentence_count": 12,
+      "empathetic_words": 1,
+      "enthusiastic_words": 0,
+      "formal_words": 0,
+      "profile": "factual",
+      "query": "Describe the academic support services available.",
+      "response_preview": "As an assistant at NSBM Green University's Faculty of Computing (FOC), I'm happy to inform you that we provide a range of academic support services to",
+      "time_seconds": 6.2
+    },
+    {
+      "word_count": 170,
+      "unique_words": 120,
+      "type_token_ratio": 0.7059,
+      "avg_word_length": 5.67,
+      "sentence_count": 7,
+      "empathetic_words": 3,
+      "enthusiastic_words": 0,
+      "formal_words": 0,
+      "profile": "emotional",
+      "query": "Describe the academic support services available.",
+      "response_preview": "At NSBM Green University's Faculty of Computing (FOC), we understand that academic success is not just about attending classes, but also about receivi",
+      "time_seconds": 6.6
+    },
+    {
+      "word_count": 167,
+      "unique_words": 109,
+      "type_token_ratio": 0.6527,
+      "avg_word_length": 6.02,
+      "sentence_count": 7,
+      "empathetic_words": 2,
+      "enthusiastic_words": 0,
+      "formal_words": 0,
+      "profile": "creative",
+      "query": "Describe the academic support services available.",
+      "response_preview": "At NSBM Green University, Faculty of Computing (FOC) is committed to providing a supportive learning environment to ensure the success of our students",
+      "time_seconds": 6.3
+    },
+    {
+      "word_count": 151,
+      "unique_words": 118,
+      "type_token_ratio": 0.7815,
+      "avg_word_length": 6.46,
+      "sentence_count": 8,
+      "empathetic_words": 1,
+      "enthusiastic_words": 0,
+      "formal_words": 0,
+      "profile": "factual",
+      "query": "What are the facilities at NSBM Green University?",
+      "response_preview": "As an assistant to NSBM Green University, I'm happy to provide you with information on our facilities. While specific details about the university's i",
+      "time_seconds": 6.9
+    },
+    {
+      "word_count": 162,
+      "unique_words": 110,
+      "type_token_ratio": 0.679,
+      "avg_word_length": 5.96,
+      "sentence_count": 3,
+      "empathetic_words": 1,
+      "enthusiastic_words": 0,
+      "formal_words": 0,
+      "profile": "emotional",
+      "query": "What are the facilities at NSBM Green University?",
+      "response_preview": "I'd be happy to provide you with information on the facilities available at NSBM Green University!\n\nAs a university assistant for the Faculty of Compu",
+      "time_seconds": 6.5
+    },
+    {
+      "word_count": 155,
+      "unique_words": 104,
+      "type_token_ratio": 0.671,
+      "avg_word_length": 5.75,
+      "sentence_count": 8,
+      "empathetic_words": 1,
+      "enthusiastic_words": 0,
+      "formal_words": 0,
+      "profile": "creative",
+      "query": "What are the facilities at NSBM Green University?",
+      "response_preview": "Welcome to NSBM Green University! As a helpful university assistant, I'm delighted to provide you with information on our facilities. \n\nAt NSBM Green ",
+      "time_seconds": 6.7
+    }
+  ],
+  "profiles_tested": {
+    "factual": {
+      "temperature": 0.3,
+      "top_p": 0.85,
+      "top_k": 40,
+      "repetition_penalty": 1.2
+    },
+    "emotional": {
+      "temperature": 0.6,
+      "top_p": 0.9,
+      "top_k": 50,
+      "repetition_penalty": 1.1
+    },
+    "creative": {
+      "temperature": 0.85,
+      "top_p": 0.95,
+      "top_k": 100,
+      "repetition_penalty": 1.0
+    }
+  },
+  "num_queries": 5
+}
